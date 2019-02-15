@@ -9,6 +9,7 @@ import (
   _ "github.com/jinzhu/gorm/dialects/sqlite"
   "modules/subjects"
   "modules/common"
+  "modules/contact"
 )
 type Person struct {
  ID uint `json:”id”`
@@ -41,9 +42,8 @@ func main() {
       })
     })
   }
-  subject := subjects.Subject{ID:2, Slug:"server", Subject : "Server"}
-  db.Save(&subject)
   subjects.SubjectsRoutes(api.Group("/subjects"))
+  contact.ContactRoutes(api.Group("/contact"))
   // Our API will consit of just two routes
   // /jokes - which will retrieve a list of jokes a user can see
   // /jokes/like/:jokeID - which will capture likes sent to a particular joke
