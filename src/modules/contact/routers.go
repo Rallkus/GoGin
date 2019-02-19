@@ -3,18 +3,20 @@ package contact
 import (
 	"fmt"
 	"log"
-	"github.com/gin-gonic/gin"
 	"os"
+
+	"github.com/gin-gonic/gin"
 
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
 func ContactRoutes(router *gin.RouterGroup) {
-	router.GET("/", sendEmail)
+	router.POST("/", sendEmail)
 }
 
-func sendEmail(c *gin.Context){
+func sendEmail(c *gin.Context) {
+	fmt.Println(c.Params)
 	from := mail.NewEmail("Example User", "serhuegi@gmail.com")
 	subject := "Sending with SendGrid is Fun"
 	to := mail.NewEmail("Example User", "serhuegi@gmail.com")
@@ -30,5 +32,5 @@ func sendEmail(c *gin.Context){
 		fmt.Println(response.Body)
 		fmt.Println(response.Headers)
 	}
-	return 
+	return
 }
